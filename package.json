@@ -1,0 +1,22 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "it learn node js by sonu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sonu kumar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "express": "^5.2.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^9.1.2",
+    "nodemon": "^3.1.11"
+  }
+ 
+
+}
