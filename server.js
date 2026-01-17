@@ -3,7 +3,19 @@ const app = express();
 
 import db from './db.js';
 
+// body-parser (middle ware)...
 app.use(express.json());
+
+
+// middleware
+const logRequest = (req, res, next) => {
+  console.log(
+    `[${new Date().toLocaleString()}] Request made to: ${req.originalUrl}`
+  );
+  next();
+};
+
+app.use(logRequest);
 
 // Home Route
 app.get('/', (req, res) => {
