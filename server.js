@@ -1,39 +1,27 @@
 import express from 'express';
 const app = express();
 
-import db from './db.js';
+import passport from './auth.js';
+import db from './db.js'; // your MongoDB connection
 
-// body-parser (middle ware)...
 app.use(express.json());
 
+// Initialize Passport
+app.use(passport.initialize());
 
-// middleware
-const logRequest = (req, res, next) => {
-  console.log(
-    `[${new Date().toLocaleString()}] Request made to: ${req.originalUrl}`
-  );
-  next();
-};
-
-app.use(logRequest);
-
-// Home Route
-app.get('/', (req, res) => {
-  res.send('Welcome to my hotel....How i can help you');
+// Protected home route
+app.get('/', passport.authenticate('local', { session: false }), (req, res) => {
+  res.send('Welcome to my hotel....How I can help you');
 });
 
-// Import Menu Router
+// Routers
 import menuRoutes from './routes/menuRoutes.js';
 app.use('/menu', menuRoutes);
 
-// Import Person Router
 import personRoutes from './routes/personRoutes.js';
 app.use('/person', personRoutes);
 
-// Server Start
+// Start server
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 });
-
-
-// comment added for testing purpose
